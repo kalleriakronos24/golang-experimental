@@ -18,11 +18,13 @@ type Config struct {
 	DBPassword string
 
 	JWTSecret string
+
+	SOCKETEnabled bool
 }
 
 var AppConfig Config
 
-func InitializeAppConfig() {
+func InitializeAppConfig() Config {
 	viper.SetConfigName(".env") // allow directly reading from .env file
 	viper.SetConfigType("env")
 	viper.AddConfigPath(".")
@@ -43,6 +45,8 @@ func InitializeAppConfig() {
 	AppConfig.DBPassword = viper.GetString("DB_PASSWORD")
 
 	AppConfig.JWTSecret = viper.GetString("JWT_SECRET")
-
+	AppConfig.SOCKETEnabled = viper.GetBool("SOCKET_ENABLED")
 	log.Printf("[INIT] configuration loaded")
+
+	return AppConfig
 }

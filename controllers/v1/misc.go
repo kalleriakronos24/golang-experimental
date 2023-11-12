@@ -15,9 +15,12 @@ func Pong(c *gin.Context) {
 
 func UploadFileMultiple(c *gin.Context) {
 	// Multipart form
-	form, _ := c.MultipartForm()
-	files := form.File["upload[]"]
+	form, err := c.MultipartForm()
 
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.Response{Code: 401, Data: nil, Error: "No Form file input found"})
+	}
+	files := form.File["upload[]"]
 	for _, file := range files {
 		log.Println(file.Filename)
 		// Upload the file to specific dst.
@@ -28,7 +31,10 @@ func UploadFileMultiple(c *gin.Context) {
 
 func UploadFileSingle(c *gin.Context) {
 	// Multipart form
-	file, _ := c.FormFile("file")
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.Response{Code: 401, Data: nil, Error: "No Form file input found"})
+	}
 	log.Println(file.Filename)
 
 	// Upload the file to specific dst.

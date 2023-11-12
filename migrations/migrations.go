@@ -10,7 +10,9 @@ import (
 func Migrate() {
 
 	// auto migration all models
-	database.GetDatabaseConnection().AutoMigrate(models.User{}, models.UserLog{})
+	if err := database.GetDatabaseConnection().AutoMigrate(models.User{}, models.UserLog{}); err != nil {
+		panic(err)
+	}
 
 	fmt.Println("Database Migrated")
 }

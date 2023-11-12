@@ -7,8 +7,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	socketio "github.com/googollee/go-socket.io"
 	"github.com/kalleriakronos24/mygoapp2nd/config"
 	"github.com/kalleriakronos24/mygoapp2nd/migrations"
+	"github.com/kalleriakronos24/mygoapp2nd/pkg/sockets"
 	"github.com/kalleriakronos24/mygoapp2nd/router"
 	"github.com/kalleriakronos24/mygoapp2nd/services"
 )
@@ -41,6 +43,12 @@ func runServer() {
 }
 
 func main() {
-
 	runServer()
+	var conf = config.InitializeAppConfig()
+
+	if conf.SOCKETEnabled == true {
+		server := socketio.NewServer(nil)
+		var serv = sockets.RunSocketConnection(server)
+		http.Handle("/socket.io/", serv)
+	}
 }
