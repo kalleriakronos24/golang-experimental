@@ -44,5 +44,5 @@ func InitializeAppConfig() {
 
 	AppConfig.JWTSecret = viper.GetString("JWT_SECRET")
 
-	log.Println("[INIT] configuration loaded")
+	log.Printf("[INIT] configuration loaded")
 }

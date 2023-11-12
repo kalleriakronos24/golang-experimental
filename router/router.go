@@ -25,9 +25,11 @@ func InitializeRouter() (router *gin.Engine) {
 			user.GET("/:username", utils.AuthOnly, v1.GETUser)
 			user.PUT("", utils.AuthOnly, v1.PUTUser)
 		}
-		misc := v1route.Group("/")
+		misc := v1route.Group("/misc")
 		{
 			misc.GET("/ping", v1.Pong)
+			misc.POST("/upload", v1.UploadFileSingle)
+			misc.POST("/upload-multiple", v1.UploadFileMultiple)
 		}
 	}
 	return

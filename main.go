@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kalleriakronos24/mygoapp2nd/config"
+	"github.com/kalleriakronos24/mygoapp2nd/migrations"
 	"github.com/kalleriakronos24/mygoapp2nd/router"
 	"github.com/kalleriakronos24/mygoapp2nd/services"
 )
@@ -19,10 +20,14 @@ func init() {
 	}
 }
 
-func main() {
+func runServer() {
+	// initialize db and migrations
 	if err := services.InitializeServices(); err != nil {
 		log.Fatalln(err)
 	}
+	migrations.Migrate()
+
+	// serve all routes and routes configuration
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", config.AppConfig.Port),
 		Handler:        router.InitializeRouter(),
@@ -33,4 +38,9 @@ func main() {
 	if err := s.ListenAndServe(); err != nil {
 		log.Fatalln(err)
 	}
+}
+
+func main() {
+
+	runServer()
 }
