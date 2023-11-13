@@ -7,7 +7,7 @@ import (
 	"github.com/gofrs/uuid"
 	"github.com/kalleriakronos24/mygoapp2nd/config"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -19,7 +19,7 @@ type HandlerFunc interface {
 
 	// User Handlers
 	RegisterUser(credentials dto.UserSignup) (err error)
-	RetrieveUser(username string) (user master.User, err error)
+	RetrieveUser(username string) (user masterModel.User, err error)
 	UpdateUser(id uuid.UUID, user dto.UserUpdate) (err error)
 }
 
@@ -28,8 +28,8 @@ type module struct {
 }
 
 type dbEntity struct {
-	conn        *gorm.DB
-	userService master.UserModelAction
+	conn      *gorm.DB
+	userModel masterModel.UserModelAction
 }
 
 func InitializeServices() (err error) {
@@ -49,8 +49,8 @@ func InitializeServices() (err error) {
 	// Compose handler modules
 	Handler = &module{
 		db: &dbEntity{
-			conn:        db,
-			userService: master.NewUserAction(db),
+			conn:      db,
+			userModel: masterModel.NewUserAction(db),
 		},
 	}
 	return

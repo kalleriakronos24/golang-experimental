@@ -10,13 +10,13 @@ import (
 	"github.com/kalleriakronos24/mygoapp2nd/config"
 	"github.com/kalleriakronos24/mygoapp2nd/constants"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func (m *module) AuthenticateUser(credentials dto.UserLogin) (token string, err error) {
-	var user master.User
-	if user, err = m.db.userService.GetOneByUsername(credentials.Username); err != nil {
+	var user masterModel.User
+	if user, err = m.db.userModel.GetOneByUsername(credentials.Username); err != nil {
 		return "", errors.New("incorrect credentials")
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)); err != nil {
@@ -31,7 +31,7 @@ func (m *module) RegisterUser(credentials dto.UserSignup) (err error) {
 	if hashedPassword, err = bcrypt.GenerateFromPassword([]byte(credentials.Password), bcrypt.DefaultCost); err != nil {
 		return errors.New("failed hashing password")
 	}
-	if _, err = m.db.userService.InsertUser(master.User{
+	if _, err = m.db.userModel.InsertUser(masterModel.User{
 		Username: credentials.Username,
 		Email:    credentials.Email,
 		Password: string(hashedPassword),
@@ -43,7 +43,7 @@ func (m *module) RegisterUser(credentials dto.UserSignup) (err error) {
 	return
 }
 
-func generateToken(user master.User) (string, error) {
+func generateToken(user masterModel.User) (string, error) {
 	now := time.Now()
 	expiry := time.Now().Add(constants.AuthenticationTimeout)
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, dto.JWTClaims{

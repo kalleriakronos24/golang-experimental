@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gofrs/uuid"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"github.com/kalleriakronos24/mygoapp2nd/services"
 )
 
@@ -17,7 +17,7 @@ func GETUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, dto.Response{Error: err.Error()})
 		return
 	}
-	var user master.User
+	var user masterModel.User
 	if user, err = services.Handler.RetrieveUser(userInfo.Username); err != nil {
 		c.JSON(http.StatusNotFound, dto.Response{Error: "cannot find user"})
 		return
