@@ -20,6 +20,12 @@ type Config struct {
 	JWTSecret string
 
 	SOCKETEnabled bool
+
+	MAILHost     string
+	MAILPort     int
+	MAILUsername string
+	MAILPassword string
+	MAILFrom     string
 }
 
 var AppConfig Config
@@ -46,7 +52,12 @@ func InitializeAppConfig() Config {
 
 	AppConfig.JWTSecret = viper.GetString("JWT_SECRET")
 	AppConfig.SOCKETEnabled = viper.GetBool("SOCKET_ENABLED")
-	log.Printf("[INIT] configuration loaded")
 
+	AppConfig.MAILHost = viper.GetString("MAIL_HOST")
+	AppConfig.MAILPort = viper.GetInt("MAIL_PORT")
+	AppConfig.MAILUsername = viper.GetString("MAIL_PASSWORD")
+	AppConfig.MAILFrom = viper.GetString("MAIL_FROM")
+
+	log.Printf("[INIT] configuration loaded")
 	return AppConfig
 }

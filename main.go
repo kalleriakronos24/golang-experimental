@@ -13,6 +13,7 @@ import (
 	"github.com/kalleriakronos24/mygoapp2nd/pkg/sockets"
 	"github.com/kalleriakronos24/mygoapp2nd/router"
 	"github.com/kalleriakronos24/mygoapp2nd/services"
+	"github.com/spf13/viper"
 )
 
 func init() {
@@ -43,12 +44,10 @@ func runServer() {
 }
 
 func main() {
-	runServer()
-	var conf = config.InitializeAppConfig()
-
-	if conf.SOCKETEnabled == true {
+	if viper.GetBool("SOCKET_ENABLED") == true {
 		server := socketio.NewServer(nil)
 		var serv = sockets.RunSocketConnection(server)
 		http.Handle("/socket.io/", serv)
 	}
+	runServer()
 }
