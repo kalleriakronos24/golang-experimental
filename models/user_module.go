@@ -1,19 +1,14 @@
 package models
 
 import (
+	"github.com/gofrs/uuid"
 	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"gorm.io/gorm"
 )
 
-type userLogOrm struct {
-	db *gorm.DB
-}
-
-type UserLog struct {
-	ID          uint   `gorm:"primaryKey" json:"-"`
-	Action      string `json:"-"`
-	Description string
-	Kind        string // common / error
+type UserModule struct {
+	ID         uuid.UUID `gorm:"type:uuid;default:gen_random_uuid()"`
+	ModuleName string    `json:"-"`
 
 	UserID uint
 	User   master.User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;foreignKey:UserID"`

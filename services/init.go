@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gofrs/uuid"
 	"github.com/kalleriakronos24/mygoapp2nd/config"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	"github.com/kalleriakronos24/mygoapp2nd/models"
+	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -15,10 +16,11 @@ var Handler HandlerFunc
 
 type HandlerFunc interface {
 	AuthenticateUser(credentials dto.UserLogin) (token string, err error)
-	RegisterUser(credentials dto.UserSignup) (err error)
 
-	RetrieveUser(username string) (user models.User, err error)
-	UpdateUser(id uint, user dto.UserUpdate) (err error)
+	// User Handlers
+	RegisterUser(credentials dto.UserSignup) (err error)
+	RetrieveUser(username string) (user master.User, err error)
+	UpdateUser(id uuid.UUID, user dto.UserUpdate) (err error)
 }
 
 type module struct {
@@ -26,8 +28,8 @@ type module struct {
 }
 
 type dbEntity struct {
-	conn      *gorm.DB
-	userOrmer models.UserOrmer
+	conn        *gorm.DB
+	userService master.UserModelAction
 }
 
 func InitializeServices() (err error) {
@@ -47,8 +49,8 @@ func InitializeServices() (err error) {
 	// Compose handler modules
 	Handler = &module{
 		db: &dbEntity{
-			conn:      db,
-			userOrmer: models.NewUserOrmer(db),
+			conn:        db,
+			userService: master.NewUserAction(db),
 		},
 	}
 	return

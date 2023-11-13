@@ -4,19 +4,20 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/gofrs/uuid"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	"github.com/kalleriakronos24/mygoapp2nd/models"
+	master "github.com/kalleriakronos24/mygoapp2nd/models/master"
 )
 
-func (m *module) RetrieveUser(username string) (user models.User, err error) {
-	if user, err = m.db.userOrmer.GetOneByUsername(username); err != nil {
-		return models.User{}, fmt.Errorf("cannot find user with username %s", username)
+func (m *module) RetrieveUser(username string) (user master.User, err error) {
+	if user, err = m.db.userService.GetOneByUsername(username); err != nil {
+		return master.User{}, fmt.Errorf("cannot find user with username %s", username)
 	}
 	return
 }
 
-func (m *module) UpdateUser(id uint, user dto.UserUpdate) (err error) {
-	if err = m.db.userOrmer.UpdateUser(models.User{
+func (m *module) UpdateUser(id uuid.UUID, user dto.UserUpdate) (err error) {
+	if err = m.db.userService.UpdateUser(master.User{
 		ID:    id,
 		Email: user.Email,
 		Bio:   user.Bio,

@@ -5,12 +5,13 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
+	"github.com/gofrs/uuid"
 )
 
 type JWTClaims struct {
-	ID        uint  `json:"sub,omitempty"`
-	ExpiresAt int64 `json:"exp,omitempty"`
-	IssuedAt  int64 `json:"iat,omitempty"`
+	ID        uuid.UUID `json:"sub,omitempty"`
+	ExpiresAt int64     `json:"exp,omitempty"`
+	IssuedAt  int64     `json:"iat,omitempty"`
 }
 
 func (c JWTClaims) Valid(helper *jwt.ValidationHelper) (err error) {
