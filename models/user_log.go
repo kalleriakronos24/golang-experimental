@@ -1,7 +1,7 @@
 package models
 
 import (
-	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
 	"gorm.io/gorm"
 )
 
@@ -16,7 +16,7 @@ type UserLog struct {
 	Kind        string // common / error
 
 	UserID uint
-	User   masterModel.User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;foreignKey:UserID"`
+	User   masterModels.User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;foreignKey:UserID"`
 
 	gorm.Model
 }

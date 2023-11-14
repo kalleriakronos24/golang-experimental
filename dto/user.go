@@ -1,7 +1,7 @@
 package dto
 
 import (
-	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
 )
 
 type UserLogin struct {
@@ -30,5 +30,5 @@ type UserInfo struct {
 }
 
 type UserInfoAll struct {
-	masterModel.User
+	masterModels.User
 }

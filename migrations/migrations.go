@@ -5,16 +5,16 @@ import (
 
 	database "github.com/kalleriakronos24/mygoapp2nd/db"
 	"github.com/kalleriakronos24/mygoapp2nd/models"
-	masterModel "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
 )
 
 func Migrate() {
 	// auto migration all models
 	if err := database.GetDatabaseConnection().AutoMigrate(
 		// master
-		masterModel.User{},
-		masterModel.Module{},
-		masterModel.SysOptions{},
+		masterModels.User{},
+		masterModels.Module{},
+		masterModels.SysOptions{},
 		// common
 		models.UserLog{},
 		models.UserModule{},
