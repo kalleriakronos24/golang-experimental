@@ -15,6 +15,7 @@ import (
 var Handler HandlerFunc
 
 type HandlerFunc interface {
+	// AuthenticateUser ====== Authentication Handlers ====== //
 	AuthenticateUser(p dto.UserLogin) (token string, err error)
 
 	// RegisterUser ====== User Handlers ====== //
@@ -26,6 +27,8 @@ type HandlerFunc interface {
 	CreateMasterModule(p dto.CreateMasterModule) (m masterModels.Module, err error)
 	UpdateMasterModule(id uuid.UUID, p dto.UpdateMasterModule) (err error)
 	RetrieveMasterModule(p dto.RetrieveOneMasterModule) (m masterModels.Module, err error)
+	DeleteMasterModule(id uuid.UUID) (err error)
+	CheckExistingMasterModule(moduleName string, id string) (err error)
 
 	// ====== Master System Option Handlers ====== //
 }

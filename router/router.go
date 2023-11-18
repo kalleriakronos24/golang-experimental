@@ -37,6 +37,8 @@ func InitializeRouter() (router *gin.Engine) {
 		{
 			masterModule.GET("/", v1Master.GETOneMasterModule)
 			masterModule.POST("/", v1Master.POSTMasterModule)
+			masterModule.PUT("/:id", v1Master.PUTMasterModule)
+			masterModule.DELETE("/:id", v1Master.DELETEMasterModule)
 		}
 	}
 	return
