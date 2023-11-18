@@ -31,10 +31,6 @@ func GETOneMasterModule(c *gin.Context) {
 	}})
 }
 
-func GETAllMasterModule(c *gin.Context) {
-
-}
-
 func POSTMasterModule(c *gin.Context) {
 	var err error
 	var p dto.CreateMasterModule
