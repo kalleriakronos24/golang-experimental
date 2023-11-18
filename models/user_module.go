@@ -3,7 +3,7 @@ package models
 import (
 	"github.com/gofrs/uuid"
 	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
-	"gorm.io/gorm"
+	"github.com/kalleriakronos24/mygoapp2nd/types"
 )
 
 type UserModule struct {
@@ -13,5 +13,5 @@ type UserModule struct {
 	UserID uint
 	User   masterModels.User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;foreignKey:UserID"`
 
-	gorm.Model
+	types.DefaultModelProperty
 }

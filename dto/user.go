@@ -1,9 +1,5 @@
 package dto
 
-import (
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
-)
-
 type UserLogin struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
@@ -23,12 +19,8 @@ type UserUpdate struct {
 	Role  string `json:"role" binding:"-"`
 }
 
-type UserInfo struct {
+type RetrieveUserInfo struct {
 	Username string `uri:"username" json:"username"`
 	Email    string `json:"email"`
 	Bio      string `json:"bio"`
-}
-
-type UserInfoAll struct {
-	masterModels.User
 }

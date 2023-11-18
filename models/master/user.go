@@ -1,7 +1,8 @@
 package models
 
 import (
-	"github.com/gofrs/uuid"
+	"github.com/google/uuid"
+	"github.com/kalleriakronos24/mygoapp2nd/types"
 	"gorm.io/gorm"
 )
 
@@ -17,7 +18,7 @@ type User struct {
 	Bio      string    `json:"-"`
 	Role     string    `json:"-"`
 
-	gorm.Model
+	types.DefaultModelProperty
 }
 
 type UserModelAction interface {

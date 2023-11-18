@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gofrs/uuid"
+	"github.com/google/uuid"
 	"github.com/kalleriakronos24/mygoapp2nd/config"
 	"github.com/kalleriakronos24/mygoapp2nd/dto"
 	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
@@ -15,12 +15,19 @@ import (
 var Handler HandlerFunc
 
 type HandlerFunc interface {
-	AuthenticateUser(credentials dto.UserLogin) (token string, err error)
+	AuthenticateUser(p dto.UserLogin) (token string, err error)
 
-	// User Handlers
-	RegisterUser(credentials dto.UserSignup) (err error)
-	RetrieveUser(username string) (user masterModels.User, err error)
-	UpdateUser(id uuid.UUID, user dto.UserUpdate) (err error)
+	// RegisterUser ====== User Handlers ====== //
+	RegisterUser(p dto.UserSignup) (err error)
+	RetrieveUser(username string) (m masterModels.User, err error)
+	UpdateUser(id uuid.UUID, p dto.UserUpdate) (err error)
+
+	// CreateMasterModule ====== Master Module Handlers ====== //
+	CreateMasterModule(p dto.CreateMasterModule) (m masterModels.Module, err error)
+	UpdateMasterModule(id uuid.UUID, p dto.UpdateMasterModule) (err error)
+	RetrieveMasterModule(p dto.RetrieveOneMasterModule) (m masterModels.Module, err error)
+
+	// ====== Master System Option Handlers ====== //
 }
 
 type module struct {
@@ -28,8 +35,10 @@ type module struct {
 }
 
 type dbEntity struct {
-	conn      *gorm.DB
-	userModel masterModels.UserModelAction
+	conn                    *gorm.DB
+	userModel               masterModels.UserModelAction
+	masterModuleModel       masterModels.ModuleModelAction
+	masterSystemOptionModel masterModels.SysOptionsModelAction
 }
 
 func InitializeServices() (err error) {
@@ -41,16 +50,18 @@ func InitializeServices() (err error) {
 			config.AppConfig.DBUsername, config.AppConfig.DBPassword),
 	), &gorm.Config{})
 	if err != nil {
-		log.Println("[INIT] failed connecting to PostgreSQL")
+		log.Println("[INIT] failed connecting to PostgresSQL")
 		return
 	}
-	log.Println("[INIT] connected to PostgreSQL")
+	log.Println("[INIT] connected to PostgresSQL")
 
 	// Compose handler modules
 	Handler = &module{
 		db: &dbEntity{
-			conn:      db,
-			userModel: masterModels.NewUserAction(db),
+			conn:                    db,
+			userModel:               masterModels.NewUserAction(db),
+			masterModuleModel:       masterModels.NewModuleAction(db),
+			masterSystemOptionModel: masterModels.NewSysOptionsAction(db),
 		},
 	}
 	return

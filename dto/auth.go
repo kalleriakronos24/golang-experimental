@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
-	"github.com/gofrs/uuid"
+	"github.com/google/uuid"
 )
 
 type JWTClaims struct {

@@ -14,9 +14,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (m *module) AuthenticateUser(credentials dto.UserLogin) (token string, err error) {
+func (module *module) AuthenticateUser(credentials dto.UserLogin) (token string, err error) {
 	var user masterModels.User
-	if user, err = m.db.userModel.GetOneByUsername(credentials.Username); err != nil {
+	if user, err = module.db.userModel.GetOneByUsername(credentials.Username); err != nil {
 		return "", errors.New("incorrect credentials")
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)); err != nil {
@@ -26,12 +26,12 @@ func (m *module) AuthenticateUser(credentials dto.UserLogin) (token string, err 
 	return generateToken(user)
 }
 
-func (m *module) RegisterUser(credentials dto.UserSignup) (err error) {
+func (module *module) RegisterUser(credentials dto.UserSignup) (err error) {
 	var hashedPassword []byte
 	if hashedPassword, err = bcrypt.GenerateFromPassword([]byte(credentials.Password), bcrypt.DefaultCost); err != nil {
 		return errors.New("failed hashing password")
 	}
-	if _, err = m.db.userModel.InsertUser(masterModels.User{
+	if _, err = module.db.userModel.InsertUser(masterModels.User{
 		Username: credentials.Username,
 		Email:    credentials.Email,
 		Password: string(hashedPassword),

@@ -10,6 +10,8 @@ require (
 	gorm.io/gorm v1.25.4
 )
 
+require github.com/google/uuid v1.4.0 // indirect
+
 require (
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
