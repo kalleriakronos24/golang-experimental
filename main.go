@@ -8,11 +8,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
-	"github.com/kalleriakronos24/mygoapp2nd/config"
-	"github.com/kalleriakronos24/mygoapp2nd/migrations"
-	"github.com/kalleriakronos24/mygoapp2nd/pkg/sockets"
-	"github.com/kalleriakronos24/mygoapp2nd/router"
-	"github.com/kalleriakronos24/mygoapp2nd/services"
+	"github.com/kalleriakronos24/golang-experimental/config"
+	"github.com/kalleriakronos24/golang-experimental/migrations"
+	"github.com/kalleriakronos24/golang-experimental/pkg/sockets"
+	"github.com/kalleriakronos24/golang-experimental/router"
+	"github.com/kalleriakronos24/golang-experimental/services"
 	"github.com/spf13/viper"
 )
 

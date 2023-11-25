@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
-	"github.com/kalleriakronos24/mygoapp2nd/services"
+	"github.com/kalleriakronos24/golang-experimental/dto"
+	masterModels "github.com/kalleriakronos24/golang-experimental/models/master"
+	"github.com/kalleriakronos24/golang-experimental/services"
 )
 
 func GETUser(c *gin.Context) {

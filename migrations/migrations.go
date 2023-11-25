@@ -3,9 +3,9 @@ package migrations
 import (
 	"fmt"
 
-	database "github.com/kalleriakronos24/mygoapp2nd/db"
-	"github.com/kalleriakronos24/mygoapp2nd/models"
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	database "github.com/kalleriakronos24/golang-experimental/db"
+	"github.com/kalleriakronos24/golang-experimental/models"
+	masterModels "github.com/kalleriakronos24/golang-experimental/models/master"
 )
 
 func Migrate() {

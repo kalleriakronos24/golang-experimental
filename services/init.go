@@ -1,13 +1,12 @@
 package services
 
 import (
-	"fmt"
+	"github.com/kalleriakronos24/golang-experimental/config"
 	"log"
 
 	"github.com/google/uuid"
-	"github.com/kalleriakronos24/mygoapp2nd/config"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	"github.com/kalleriakronos24/golang-experimental/dto"
+	masterModels "github.com/kalleriakronos24/golang-experimental/models/master"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -47,17 +46,13 @@ type dbEntity struct {
 func InitializeServices() (err error) {
 	// Initialize DB
 	var db *gorm.DB
-	db, err = gorm.Open(postgres.Open(
-		fmt.Sprintf("host=%s port=%d dbname=%s user=%s password=%s sslmode=disable",
-			config.AppConfig.DBHost, config.AppConfig.DBPort, config.AppConfig.DBDatabase,
-			config.AppConfig.DBUsername, config.AppConfig.DBPassword),
-	), &gorm.Config{})
+	db, err = gorm.Open(postgres.Open(config.AppConfig.DBUrl), &gorm.Config{})
 	if err != nil {
 		log.Println("[INIT] failed connecting to PostgresSQL")
 		return
 	}
 	log.Println("[INIT] connected to PostgresSQL")
-
+	///
 	// Compose handler modules
 	Handler = &module{
 		db: &dbEntity{

@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
+	"github.com/kalleriakronos24/golang-experimental/dto"
 )
 
 func Pong(c *gin.Context) {
@@ -24,7 +24,10 @@ func UploadFileMultiple(c *gin.Context) {
 	for _, file := range files {
 		log.Println(file.Filename)
 		// Upload the file to specific dst.
-		c.SaveUploadedFile(file, ".")
+		err := c.SaveUploadedFile(file, ".")
+		if err != nil {
+			return
+		}
 	}
 	c.String(http.StatusOK, fmt.Sprintf("%d files uploaded!", len(files)))
 }
@@ -38,7 +41,10 @@ func UploadFileSingle(c *gin.Context) {
 	log.Println(file.Filename)
 
 	// Upload the file to specific dst.
-	c.SaveUploadedFile(file, ".")
+	err = c.SaveUploadedFile(file, ".")
+	if err != nil {
+		return
+	}
 
 	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
 }

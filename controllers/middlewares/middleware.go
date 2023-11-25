@@ -7,9 +7,9 @@ import (
 
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gin-gonic/gin"
-	"github.com/kalleriakronos24/mygoapp2nd/config"
-	"github.com/kalleriakronos24/mygoapp2nd/constants"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
+	"github.com/kalleriakronos24/golang-experimental/config"
+	"github.com/kalleriakronos24/golang-experimental/constants"
+	"github.com/kalleriakronos24/golang-experimental/dto"
 )
 
 func AuthMiddleware(c *gin.Context) {

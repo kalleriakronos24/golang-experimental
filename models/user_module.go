@@ -2,8 +2,8 @@ package models
 
 import (
 	"github.com/gofrs/uuid"
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
-	"github.com/kalleriakronos24/mygoapp2nd/types"
+	masterModels "github.com/kalleriakronos24/golang-experimental/models/master"
+	"github.com/kalleriakronos24/golang-experimental/types"
 )
 
 type UserModule struct {

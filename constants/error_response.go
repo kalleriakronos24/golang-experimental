@@ -2,7 +2,7 @@ package constants
 
 import (
 	"fmt"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
+	"github.com/kalleriakronos24/golang-experimental/dto"
 )
 
 func GetErrorResponse(kind string, err error, modelName string) dto.Response {

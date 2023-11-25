@@ -1,4 +1,4 @@
-module github.com/kalleriakronos24/mygoapp2nd
+module github.com/kalleriakronos24/golang-experimental
 
 go 1.21
 
@@ -10,7 +10,7 @@ require (
 	gorm.io/gorm v1.25.4
 )
 
-require github.com/google/uuid v1.4.0 // indirect
+require github.com/google/uuid v1.4.0
 
 require (
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect

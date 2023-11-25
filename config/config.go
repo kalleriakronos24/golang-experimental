@@ -16,6 +16,7 @@ type Config struct {
 	DBDatabase string
 	DBUsername string
 	DBPassword string
+	DBUrl      string
 
 	JWTSecret string
 
@@ -49,6 +50,7 @@ func InitializeAppConfig() Config {
 	AppConfig.DBDatabase = viper.GetString("DB_DATABASE")
 	AppConfig.DBUsername = viper.GetString("DB_USERNAME")
 	AppConfig.DBPassword = viper.GetString("DB_PASSWORD")
+	AppConfig.DBUrl = viper.GetString("DATABASE_URL")
 
 	AppConfig.JWTSecret = viper.GetString("JWT_SECRET")
 	AppConfig.SOCKETEnabled = viper.GetBool("SOCKET_ENABLED")

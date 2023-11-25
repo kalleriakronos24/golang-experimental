@@ -2,8 +2,8 @@ package models
 
 import (
 	"github.com/google/uuid"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	"github.com/kalleriakronos24/mygoapp2nd/types"
+	"github.com/kalleriakronos24/golang-experimental/dto"
+	"github.com/kalleriakronos24/golang-experimental/types"
 	"gorm.io/gorm"
 )
 

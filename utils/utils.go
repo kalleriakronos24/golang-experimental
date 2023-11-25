@@ -2,8 +2,8 @@ package utils
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kalleriakronos24/mygoapp2nd/constants"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
+	"github.com/kalleriakronos24/golang-experimental/constants"
+	"github.com/kalleriakronos24/golang-experimental/dto"
 	"net/http"
 )
 

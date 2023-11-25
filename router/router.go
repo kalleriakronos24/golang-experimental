@@ -2,10 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	middleware "github.com/kalleriakronos24/mygoapp2nd/controllers/middlewares"
-	v1 "github.com/kalleriakronos24/mygoapp2nd/controllers/v1"
-	v1Master "github.com/kalleriakronos24/mygoapp2nd/controllers/v1/master"
-	"github.com/kalleriakronos24/mygoapp2nd/utils"
+	middleware "github.com/kalleriakronos24/golang-experimental/controllers/middlewares"
+	v1 "github.com/kalleriakronos24/golang-experimental/controllers/v1"
+	v1Master "github.com/kalleriakronos24/golang-experimental/controllers/v1/master"
+	"github.com/kalleriakronos24/golang-experimental/utils"
 )
 
 func InitializeRouter() (router *gin.Engine) {
@@ -23,8 +23,8 @@ func InitializeRouter() (router *gin.Engine) {
 		}
 		user := v1route.Group("/user")
 		{
-			user.GET("/:username", utils.AuthOnly, v1.GETUser)
-			user.PUT("/:id", utils.AuthOnly, v1.PUTUser)
+			user.GET("/:username", utils.AuthOnly, v1Master.GETUser)
+			user.PUT("/:id", utils.AuthOnly, v1Master.PUTUser)
 		}
 		misc := v1route.Group("/misc")
 		{
@@ -39,6 +39,11 @@ func InitializeRouter() (router *gin.Engine) {
 			masterModule.POST("/", v1Master.POSTMasterModule)
 			masterModule.PUT("/:id", v1Master.PUTMasterModule)
 			masterModule.DELETE("/:id", v1Master.DELETEMasterModule)
+		}
+
+		userModulePermission := v1route.Group("/user-module-permission")
+		{
+			userModulePermission.POST("/", v1.POSTUserModulePermission)
 		}
 	}
 	return
@@ -59,8 +64,8 @@ func InitializeEnterpriseRouter() (router *gin.Engine) {
 		}
 		user := v1route.Group("/user")
 		{
-			user.GET("/:username", utils.AuthOnly, v1.GETUser)
-			user.PUT("/:id", utils.AuthOnly, v1.PUTUser)
+			user.GET("/:username", utils.AuthOnly, v1Master.GETUser)
+			user.PUT("/:id", utils.AuthOnly, v1Master.PUTUser)
 		}
 		misc := v1route.Group("/misc")
 		{

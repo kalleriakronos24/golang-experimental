@@ -1,14 +1,14 @@
 package v1
 
 import (
-	"github.com/kalleriakronos24/mygoapp2nd/constants"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
+	"github.com/kalleriakronos24/golang-experimental/constants"
+	"github.com/kalleriakronos24/golang-experimental/dto"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	_ "github.com/kalleriakronos24/mygoapp2nd/dto"
-	"github.com/kalleriakronos24/mygoapp2nd/services"
+	_ "github.com/kalleriakronos24/golang-experimental/dto"
+	"github.com/kalleriakronos24/golang-experimental/services"
 )
 
 func GETOneMasterModule(c *gin.Context) {

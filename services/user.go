@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/kalleriakronos24/mygoapp2nd/dto"
-	masterModels "github.com/kalleriakronos24/mygoapp2nd/models/master"
+	"github.com/kalleriakronos24/golang-experimental/dto"
+	masterModels "github.com/kalleriakronos24/golang-experimental/models/master"
 )
 
 func (module *module) RetrieveUser(username string) (m masterModels.User, err error) {
